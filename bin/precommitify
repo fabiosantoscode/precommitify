@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+'use strict'
+
+const fs = require('fs')
+const sh = require('child_process').execSync
+
+sh('npm install --save-dev husky standard-format istanbul')
+
+const package = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
+
+package.scripts.test = 'istanbul cover ./node_modules/.bin/_mocha'
+package.scripts.precommit = 'npm run lint && npm run test'
+package.scripts.lint = 'standard-format -w lib/*'
+
+fs.writeFileSync('package.json', JSON.stringify(package, null, 2))
+
