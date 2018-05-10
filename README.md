@@ -1,5 +1,10 @@
 # precommitify
 
+```bash
+$ cd your-project
+$ precommitify
+```
+
 Installs husky, standard-format and istanbul.
 
 Then sets up your precommit, test and lint scripts using these packages.
