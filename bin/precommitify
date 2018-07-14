@@ -9,7 +9,7 @@ sh('npm install --save-dev husky standard istanbul@1.1.0-alpha.1')
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
 
 pkg.scripts.test = 'istanbul cover ./node_modules/.bin/_mocha'
-pkg.scripts.precommit = 'npm run lint && npm run test'
+pkg.scripts.precommit = 'npm run lint --silent && npm run test --silent'
 pkg.scripts.lint = "standard --fix 'lib/**/*.js'"
 
 fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
