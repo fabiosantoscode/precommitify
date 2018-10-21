@@ -4,7 +4,7 @@
 const fs = require('fs')
 const sh = require('child_process').execSync
 
-const standard = 'eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node'
+const standard = 'eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node'
 sh('npm install --save-dev husky istanbul@1.1.0-alpha.1 ' + standard)
 
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
