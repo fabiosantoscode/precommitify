@@ -16,5 +16,5 @@ pkg.scripts.test = 'istanbul cover ./node_modules/.bin/_mocha'
 pkg.scripts.precommit = 'npm run lint --silent && npm run test --silent'
 pkg.scripts.lint = "eslint --fix 'lib/**/*.js'"
 
-fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
+fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')
 
