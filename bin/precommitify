@@ -4,17 +4,21 @@
 const fs = require('fs')
 const sh = require('child_process').execSync
 
-const standard = 'eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node'
+const standard = 'cross-env eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node'
 sh('npm install --save-dev husky istanbul@1.1.0-alpha.1 ' + standard)
 
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
 
 pkg.eslintConfig = {
-  extends: 'standard'
+  extends: 'standard',
+  globals: {
+    describe: false,
+    it: false
+  }
 }
 pkg.scripts.test = 'istanbul cover ./node_modules/.bin/_mocha'
-pkg.scripts.precommit = 'npm run lint --silent && npm run test --silent'
 pkg.scripts.lint = "eslint --fix 'lib/**/*.js'"
+pkg.husky = { hooks: { 'pre-commit': 'npm run lint --silent && npm run test --silent' } }
 
 fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')
 
